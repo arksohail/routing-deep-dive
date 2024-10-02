@@ -15,13 +15,13 @@ export class UserTasksComponent implements OnInit {
   // userId = input.required<string>();
   userId = signal<string>("");
 
-  private usersService = inject(UsersService);
-  private activatedRoute = inject(ActivatedRoute);
-  private destroyRef = inject(DestroyRef);
+  // private usersService = inject(UsersService);
+  // private activatedRoute = inject(ActivatedRoute);
+  // private destroyRef = inject(DestroyRef);
 
-  // userName = input.required<string>();
-  userName?: string;
+  userName = input.required<string>();
   // user = computed(() => this.usersService.users.find(u => u.id === this.userId()));
+  // userName?: string;
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -41,20 +41,20 @@ export class UserTasksComponent implements OnInit {
 
     // this.destroyRef.onDestroy(() => subscription.unsubscribe())
 
-    const subscription = this.activatedRoute
-      .data
-      .subscribe({
-        next: (data) => {
-          const message = data['message'];
-          const userName = data['userName'];
-          console.log(message);
-          console.log(userName);
+    // const subscription = this.activatedRoute
+    //   .data
+    //   .subscribe({
+    //     next: (data) => {
+    //       const message = data['message'];
+    //       const userName = data['userName'];
+    //       console.log(message);
+    //       console.log(userName);
           
-          this.userName = userName;
-        }
-      });
+    //       this.userName = userName;
+    //     }
+    //   });
 
-    this.destroyRef.onDestroy(() => subscription.unsubscribe())
+    // this.destroyRef.onDestroy(() => subscription.unsubscribe())
   }
 }
 
