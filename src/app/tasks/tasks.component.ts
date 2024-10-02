@@ -13,8 +13,9 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 })
 export class TasksComponent implements OnInit {
   userId = input.required<string>(); // Only accesible using the withRouterConfig({paramsInheritanceStrategy: 'always'})
+  message = input(); // Only accesible using the withRouterConfig({paramsInheritanceStrategy: 'always'})
   // order?: 'asc' | 'desc';
-  order = signal<'asc' | 'desc'>('desc');
+  order = signal<'asc' | 'desc'>('asc');
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
   private taskService = inject(TasksService);
@@ -33,6 +34,7 @@ export class TasksComponent implements OnInit {
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
+    console.log("DATA INPUT: ", this.message());
     const subscription = this.activatedRoute.queryParams.subscribe({
       next: (params) => {
         this.order.set(params['order']);
