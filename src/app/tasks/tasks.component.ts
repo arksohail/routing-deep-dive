@@ -13,7 +13,8 @@ import { RouterLink } from '@angular/router';
 })
 export class TasksComponent {
   userId = input.required<string>(); // Only accesible using the withRouterConfig({paramsInheritanceStrategy: 'always'})
-  private taskService = inject(TasksService)
+  order = input<'asc' | 'dsc'>();
+  private taskService = inject(TasksService);
   userTasks = computed(() => this.taskService.allTasks().filter(u => u.userId === this.userId()));
 
 }
