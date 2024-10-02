@@ -1,6 +1,6 @@
 import { Component, computed, DestroyRef, inject, input, OnInit, signal } from '@angular/core';
 import { UsersService } from '../users.service';
-import { ActivatedRoute, RouterOutlet } from '@angular/router';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
 import { User } from '../user/user.model';
 import { JsonPipe } from '@angular/common';
 
@@ -9,7 +9,7 @@ import { JsonPipe } from '@angular/common';
   standalone: true,
   templateUrl: './user-tasks.component.html',
   styleUrl: './user-tasks.component.css',
-  imports: [RouterOutlet]
+  imports: [RouterOutlet, RouterLink]
 })
 export class UserTasksComponent implements OnInit{
   // userId = input.required<string>();
