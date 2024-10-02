@@ -1,6 +1,18 @@
-import { Route } from "@angular/router";
-import { NewTaskComponent } from "../tasks/new-task/new-task.component";
+import { CanMatchFn, RedirectCommand, Route, Router } from "@angular/router";
+import { canLeaveEditPage, NewTaskComponent } from "../tasks/new-task/new-task.component";
 import { resolveUserTasks, TasksComponent } from "../tasks/tasks.component";
+import { inject } from "@angular/core";
+
+
+export const dummyCanmatch: CanMatchFn = (route, segments) => {
+  const router = inject(Router);
+  const shouldGetAccess = Math.random();
+  if(shouldGetAccess < 0.5) {
+    return true;
+  } else {
+    return new RedirectCommand(router.parseUrl('/unauthorized'));
+  }
+}
 
 export const routes: Route[] = [
   {
@@ -18,6 +30,7 @@ export const routes: Route[] = [
   },
   {
     path: 'tasks/new',
-    component: NewTaskComponent
+    component: NewTaskComponent,
+    canDeactivate: [canLeaveEditPage]
   }
 ];
