@@ -11,7 +11,7 @@ import { JsonPipe } from '@angular/common';
   styleUrl: './user-tasks.component.css',
   imports: [RouterOutlet, RouterLink]
 })
-export class UserTasksComponent implements OnInit{
+export class UserTasksComponent implements OnInit {
   // userId = input.required<string>();
   userId = signal<string>("");
 
@@ -19,7 +19,8 @@ export class UserTasksComponent implements OnInit{
   private activatedRoute = inject(ActivatedRoute);
   private destroyRef = inject(DestroyRef);
 
-  userName = input.required<string>();
+  // userName = input.required<string>();
+  userName?: string;
   // user = computed(() => this.usersService.users.find(u => u.id === this.userId()));
 
   ngOnInit(): void {
@@ -39,6 +40,21 @@ export class UserTasksComponent implements OnInit{
     // });
 
     // this.destroyRef.onDestroy(() => subscription.unsubscribe())
+
+    const subscription = this.activatedRoute
+      .data
+      .subscribe({
+        next: (data) => {
+          const message = data['message'];
+          const userName = data['userName'];
+          console.log(message);
+          console.log(userName);
+          
+          this.userName = userName;
+        }
+      });
+
+    this.destroyRef.onDestroy(() => subscription.unsubscribe())
   }
 }
 
