@@ -1,7 +1,8 @@
-import { Component, input } from '@angular/core';
+import { Component, computed, inject, input } from '@angular/core';
 
 import { TaskComponent } from './task/task.component';
 import { Task } from './task/task.model';
+import { TasksService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -12,5 +13,7 @@ import { Task } from './task/task.model';
 })
 export class TasksComponent {
   userId = input.required<string>(); // Only accesible using the withRouterConfig({paramsInheritanceStrategy: 'always'})
-  userTasks: Task[] = [];
+  private taskService = inject(TasksService)
+  userTasks = computed(() => this.taskService.allTasks().filter(u => u.userId === this.userId()));
+
 }
