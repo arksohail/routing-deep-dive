@@ -25,7 +25,8 @@ export class UserTasksComponent implements OnInit{
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    console.log(this.activatedRoute);
+    console.log(this.activatedRoute.snapshot.params["userId"]);
+    console.log(this.activatedRoute.snapshot.paramMap.get("userId"));
     const subscription = this.activatedRoute
     .paramMap
     .subscribe({
